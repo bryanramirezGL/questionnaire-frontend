@@ -19,11 +19,11 @@ export class QuestionnaireComponent implements OnInit, OnDestroy {
     }, 3000);
 
     //Console log first Questionnaire
-    this.questionnaireService.getQuestionnaire(1).subscribe(
+     this.questionnaireService.getQuestionnaire(1).subscribe(
       (component) => console.log(component),
       (err) => console.error(err)
       
-    );
+    ); 
   }
   
 

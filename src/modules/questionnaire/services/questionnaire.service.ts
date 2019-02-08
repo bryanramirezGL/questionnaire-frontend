@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { Observable, throwError, from } from 'rxjs'
+import { Store, select } from '@ngrx/store';
+import { QuestionnaireState, selectQuestionnaireBussyState } from '../state/questionnaire.reducer';
+import { Observable, throwError } from 'rxjs'
 import { catchError } from 'rxjs/operators'
 import { environment } from '../../../environments/environment'
 
@@ -8,14 +10,14 @@ import { IQuestionnaire } from '../../shared/models/questionnaire.model'
 
 const ROUTE_PATH = 'questionnaire/';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class QuestionnaireService {
 
   private baseUrl : string = environment.apiUrl + ROUTE_PATH;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private appStore: Store<QuestionnaireState>) { }
+
+  public questionnaireLoading$: Observable<IQuestionnaire> = this.appStore.pipe(select(selectQuestionnaireBussyState));
 
   getQuestionnaires(): Observable<IQuestionnaire[]> {
     return this.httpClient.get<IQuestionnaire[]>(this.baseUrl).pipe(catchError(this.handleError));

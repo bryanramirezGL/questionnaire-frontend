@@ -7,7 +7,7 @@ export interface QuestionnaireState {
 }
 
 export const initialState: QuestionnaireState = {
-  currentQuestionnairy: null,
+  currentQuestionnairy: null
 };
 
 export function questionnaireReducer(
@@ -22,4 +22,8 @@ export function questionnaireReducer(
   }
 }
 
-export const selectInboxState = createFeatureSelector<QuestionnaireState>('questionnaire');
+export const selectQuestionnaireState = createFeatureSelector<QuestionnaireState>('questionnaire');
+export const selectQuestionnaireBussyState = createSelector(
+  selectQuestionnaireState,
+  (state: QuestionnaireState) => state.currentQuestionnairy
+);
