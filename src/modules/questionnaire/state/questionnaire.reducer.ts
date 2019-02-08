@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector, Action } from '@ngrx/store';
-
-// import { Actions, Types } from './questionnaire.actions';
+import { Actions, Types, GetQuestionnaire } from './questionnaire.actions';
+import { IQuestionnaire } from 'src/modules/shared/models/questionnaire.model';
 
 export interface QuestionnaireState {
-  currentQuestionnairy: any[];
+  currentQuestionnairy: IQuestionnaire;
 }
 
 export const initialState: QuestionnaireState = {
@@ -12,9 +12,11 @@ export const initialState: QuestionnaireState = {
 
 export function questionnaireReducer(
   state: QuestionnaireState = initialState,
-  action: Action
+  action: Actions
 ): QuestionnaireState {
   switch (action.type) {
+    case Types.GET_QUESTIONNAIRE:
+      return { ...state, currentQuestionnairy: (action as GetQuestionnaire).payload };
     default:
       return state;
   }
