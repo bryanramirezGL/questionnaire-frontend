@@ -1,42 +1,55 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Store, select } from '@ngrx/store';
-import { QuestionnaireState, selectQuestionnaireBussyState } from '../state/questionnaire.reducer';
-import { Observable, throwError } from 'rxjs';
+import {
+  QuestionnaireState,
+  selectCurrentQuestionnaireState
+} from '../state/questionnaire.reducer';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
 import { IQuestionnaire } from '../../app/models';
-
-const ROUTE_PATH = 'questionnaire/';
+import { AppService } from 'src/modules/app/services';
+import { GetQuestionnaire } from '../state/questionnaire.actions';
 
 @Injectable()
 export class QuestionnaireService {
+  public currentQuestionnaire$: Observable<
+    IQuestionnaire
+  > = this.questionnaireStore.pipe(select(selectCurrentQuestionnaireState));
 
-  private baseUrl: string = environment.apiUrl + ROUTE_PATH;
-
-  constructor(private httpClient: HttpClient, private appStore: Store<QuestionnaireState>) { }
-
-  public questionnaireLoading$: Observable<IQuestionnaire> = this.appStore.pipe(select(selectQuestionnaireBussyState));
-
-  getQuestionnaires(): Observable<IQuestionnaire[]> {
-    return this.httpClient.get<IQuestionnaire[]>(this.baseUrl).pipe(catchError(this.handleError));
+  public loadCurrentQuestionnaire(id: number): void {
+    // Dispatch action to get current questionnaire
+    this.questionnaireStore.dispatch(new GetQuestionnaire({id}));
   }
 
-  getQuestionnaire(id: number): Observable<IQuestionnaire> {
-    return this.httpClient.get<IQuestionnaire>(this.baseUrl + id).pipe(catchError(this.handleError));
+  public getQuestionnairesByPersonId(personId: number): Observable<IQuestionnaire[]> {
+    return this.httpClient
+      .get<IQuestionnaire[]>(
+        `${environment.apiUrl}/person/${personId}/questionnaires`
+      )
+      .pipe(catchError(this.appService.handleError));
   }
 
-  addQuestionnaire(questionnaire: IQuestionnaire): Observable<IQuestionnaire> {
-    return this.httpClient.post<IQuestionnaire>(this.baseUrl, questionnaire).pipe(catchError(this.handleError));
+  public getQuestionnaire(questionnaireId: number): Observable<IQuestionnaire> {
+    return this.httpClient
+      .get<IQuestionnaire>(`${environment.apiUrl}/questionnaire/${questionnaireId}`)
+      .pipe(catchError(this.appService.handleError));
   }
 
-  private handleError(errorResponse: HttpErrorResponse) {
-    if (errorResponse.error instanceof ErrorEvent) {
-      console.error('Client Side Error :', errorResponse.error.message);
-    } else {
-      console.error('Server Side Error :', errorResponse);
-    }
-    return throwError('There is a problem with the service. We are notified & working on it. Please try again later.');
+  public postQuestionnaireAnswers(questionnaireId: number, fields: any[]) {
+    return this.httpClient
+      .post<IQuestionnaire>(`${environment.apiUrl}/questionnaire/${questionnaireId}`, {
+        questionnaire_id: questionnaireId,
+        fields,
+      })
+      .pipe(catchError(this.appService.handleError));
   }
+
+  constructor(
+    private httpClient: HttpClient,
+    private questionnaireStore: Store<QuestionnaireState>,
+    private appService: AppService
+  ) {}
 }
