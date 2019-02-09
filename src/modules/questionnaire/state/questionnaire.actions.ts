@@ -1,8 +1,33 @@
 import { Action } from '@ngrx/store';
+import { IQuestionnaire } from '../../app/models';
 
 export enum Types {
-
+  GET_QUESTIONNAIRE = '[questionnaire] get questionnaire',
+  GET_QUESTIONNAIRE_SUCCESS = '[questionnaire] get questionnaire success',
+  POST_QUESTIONNAIRE_ANSWERS = '[questionnaire] post questionnaire answers',
 }
 
+export class GetQuestionnaire implements Action {
+  readonly type = Types.GET_QUESTIONNAIRE;
+  constructor(
+    public payload: {
+      id: number | null;
+    } = { id: null }
+  ) {}
+}
 
-export type Actions = Action[];
+export class GetQuestionnaireSuccess implements Action {
+  readonly type = Types.GET_QUESTIONNAIRE_SUCCESS;
+  constructor(public payload: IQuestionnaire) {}
+}
+
+export class PostQuestionnaireAnswers implements Action {
+  readonly type = Types.POST_QUESTIONNAIRE_ANSWERS;
+  constructor(public payload: {
+      id: number | null;
+      fields: any[] | null;
+    } = { id: null, fields: null }
+  ) {}
+}
+
+export type Actions = GetQuestionnaire | GetQuestionnaireSuccess;

@@ -11,6 +11,9 @@ import { AppEffects } from './state/app.effects';
 import { reducers } from './state/app.reducer';
 import { SERVICES } from './services';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -19,6 +22,7 @@ import { SERVICES } from './services';
     BrowserModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AppEffects]),
+    BrowserAnimationsModule,
   ],
   providers: [
     ...SERVICES,

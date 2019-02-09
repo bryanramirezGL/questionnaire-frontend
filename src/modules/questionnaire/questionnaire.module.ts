@@ -7,14 +7,16 @@ import { EffectsModule } from '@ngrx/effects';
 import { questionnaireReducer } from './state/questionnaire.reducer';
 import { QuestionnaireEffects } from './state/questionnaire.effects';
 import { QuestionnaireRouterModule } from './questionnaire.router.module';
+import { SERVICES } from './services';
 
 @NgModule({
   imports: [
     QuestionnaireRouterModule,
     StoreModule.forFeature('questionnaire', questionnaireReducer),
     EffectsModule.forFeature([ QuestionnaireEffects ]),
-    SharedModule
+    SharedModule,
   ],
-  declarations: [...COMPONENTS]
+  declarations: [...COMPONENTS],
+  providers: [...SERVICES]
 })
 export class QuestionnaireModule { }

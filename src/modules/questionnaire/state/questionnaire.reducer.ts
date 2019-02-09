@@ -1,23 +1,29 @@
-import { createFeatureSelector, createSelector, Action } from '@ngrx/store';
-
-// import { Actions, Types } from './questionnaire.actions';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Actions, Types, GetQuestionnaireSuccess } from './questionnaire.actions';
+import { IQuestionnaire } from '../../app/models';
 
 export interface QuestionnaireState {
-  currentQuestionnairy: any[];
+  currentQuestionnaire: IQuestionnaire;
 }
 
 export const initialState: QuestionnaireState = {
-  currentQuestionnairy: null,
+  currentQuestionnaire: null
 };
 
 export function questionnaireReducer(
   state: QuestionnaireState = initialState,
-  action: Action
+  action: Actions,
 ): QuestionnaireState {
   switch (action.type) {
+    case Types.GET_QUESTIONNAIRE_SUCCESS:
+      return { ...state, currentQuestionnaire: (action as GetQuestionnaireSuccess).payload };
     default:
       return state;
   }
 }
 
-export const selectInboxState = createFeatureSelector<QuestionnaireState>('questionnaire');
+export const selectQuestionnaireState = createFeatureSelector<QuestionnaireState>('questionnaire');
+export const selectCurrentQuestionnaireState = createSelector(
+  selectQuestionnaireState,
+  (state: QuestionnaireState) => state.currentQuestionnaire
+);
