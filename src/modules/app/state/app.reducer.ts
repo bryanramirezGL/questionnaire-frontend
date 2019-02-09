@@ -1,6 +1,6 @@
-import { createFeatureSelector, ActionReducerMap, createSelector, Action } from '@ngrx/store';
+import { createFeatureSelector, ActionReducerMap, createSelector } from '@ngrx/store';
 
-import { Types, SetBussyState } from './app.actions';
+import { Actions, Types, SetBussyState } from './app.actions';
 
 export interface AppState {
   bussy: boolean;
@@ -12,7 +12,7 @@ export const initialState: AppState = {
 
 export function reducer(
   state: AppState = initialState,
-  action: Action
+  action: Actions
 ): AppState {
   switch (action.type) {
     case Types.SET_BUSSY_STATE:
