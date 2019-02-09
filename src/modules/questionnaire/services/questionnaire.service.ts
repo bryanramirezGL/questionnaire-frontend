@@ -6,7 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
-import { IQuestionnaire } from '../../shared/models/questionnaire.model';
+import { IQuestionnaire } from '../../app/models';
 
 const ROUTE_PATH = 'questionnaire/';
 

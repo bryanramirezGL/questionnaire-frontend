@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector, Action } from '@ngrx/store';
 import { Actions, Types, GetQuestionnaire } from './questionnaire.actions';
-import { IQuestionnaire } from 'src/modules/shared/models/questionnaire.model';
+import { IQuestionnaire } from '../../app/models';
 
 export interface QuestionnaireState {
   currentQuestionnairy: IQuestionnaire;

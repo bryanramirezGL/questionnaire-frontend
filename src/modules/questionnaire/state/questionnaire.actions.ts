@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { IQuestionnaire } from 'src/modules/shared/models/questionnaire.model';
+import { IQuestionnaire } from '../../app/models';
 
 export enum Types {
     GET_QUESTIONNAIRE = '[questionnaire] get questionnaire',
