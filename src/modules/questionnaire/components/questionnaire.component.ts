@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class QuestionnaireComponent implements OnInit, OnDestroy {
   public appLoading$: Observable<boolean> = this.appService.appLoading$;
-  
+
   public ngOnInit(): void {
     // Example Code
     this.appService.showLoading();
@@ -18,16 +18,19 @@ export class QuestionnaireComponent implements OnInit, OnDestroy {
       this.appService.hideLoading();
     }, 3000);
 
-    //Console log first Questionnaire
-     this.questionnaireService.getQuestionnaire(1).subscribe(
-      (component) => console.log(component),
-      (err) => console.error(err)
-      
-    ); 
+    // Console log first Questionnaire
+    this.questionnaireService
+      .getQuestionnaire(1)
+      .subscribe(
+        component => console.log(component),
+        err => console.error(err)
+      );
   }
-  
 
   public ngOnDestroy(): void {}
 
-  constructor(private appService: AppService, private questionnaireService: QuestionnaireService) {}
+  constructor(
+    private appService: AppService,
+    private questionnaireService: QuestionnaireService
+  ) {}
 }

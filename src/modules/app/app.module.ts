@@ -22,8 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AppEffects]),
-    BrowserAnimationsModule
-    
+    BrowserAnimationsModule,
   ],
   providers: [
     ...SERVICES,

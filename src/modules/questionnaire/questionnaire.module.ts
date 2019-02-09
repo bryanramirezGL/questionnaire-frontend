@@ -20,12 +20,12 @@ import { MatIconModule } from '@angular/material/icon';
 
 const MaterialsModules = [
   MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatToolbarModule,
-    MatIconModule
+  MatButtonModule,
+  MatSelectModule,
+  MatFormFieldModule,
+  FormsModule,
+  MatToolbarModule,
+  MatIconModule
 ];
 
 @NgModule({
