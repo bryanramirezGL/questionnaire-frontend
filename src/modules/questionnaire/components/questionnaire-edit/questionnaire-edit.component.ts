@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AppService } from 'src/modules/app/services';
 import { QuestionnaireService } from 'src/modules/questionnaire/services';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { IQuestionnaire } from 'src/modules/app/models';
 
 @Component({
   selector: 'app-questionnaire-component',
-  templateUrl: './questionnaire.component.html',
-  styleUrls: ['./questionnaire.component.scss']
+  templateUrl: './questionnaire-edit.component.html',
+  styleUrls: ['./questionnaire-edit.component.scss']
 })
-export class QuestionnaireComponent implements OnInit, OnDestroy {
+export class QuestionnaireEditComponent implements OnInit, OnDestroy {
   public appLoading$: Observable<boolean> = this.appService.appLoading$;
   public currentQuestionnaire$: Observable<IQuestionnaire> = this.questionnaireService.currentQuestionnaire$;
 
