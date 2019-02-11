@@ -2,23 +2,21 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { QuestionnaireEditComponent } from './components/questionnaire-edit/questionnaire-edit.component';
-import { QuestionnaireListComponent  } from './components/questionnaire-list/questionnaire-list.component';
+import { QuestionnaireListComponent } from './components/questionnaire-list/questionnaire-list.component';
 
 const routes: Routes = [
-  { 
-    path: '', 
-    redirectTo: 'questionnaire-edit',
-    pathMatch: 'full'
+  {
+    path: '',
+    redirectTo: 'list',
   },
-  { 
-    path: 'questionnaire-edit', 
-    component: QuestionnaireEditComponent 
+  {
+    path: 'edit',
+    component: QuestionnaireEditComponent
   },
-  { 
-    path: 'questionnaire-list', 
-    component: QuestionnaireListComponent 
-  },
-
+  {
+    path: 'list',
+    component: QuestionnaireListComponent
+  }
 ];
 
 @NgModule({
