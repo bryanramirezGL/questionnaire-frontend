@@ -6,6 +6,7 @@
     <form (ngSubmit)="onQuestionnaireFormSubmit()" *ngIf="questionnaireForm" [formGroup]="questionnaireForm">
       <div *ngFor="let section of formSections$ | async">
         {{section.name}}
+        {{section.description}}
         <div *ngFor="let question of section.fields" >
           <div [ngSwitch]="question.type">
             <div *ngSwitchCase="'shortText'">

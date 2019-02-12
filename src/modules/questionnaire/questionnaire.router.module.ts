@@ -6,7 +6,7 @@ import { QuestionnaireEditComponent, QuestionnaireListComponent, QuestionnaireSs
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'list',
+    redirectTo: 'sso',
   },
   {
     path: 'open/:id',

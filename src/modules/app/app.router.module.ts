@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/questionnaire/list',
+    redirectTo: '/questionnaire/sso',
     pathMatch: 'full'
   },
   {
