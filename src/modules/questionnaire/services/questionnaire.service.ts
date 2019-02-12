@@ -31,7 +31,8 @@ export class QuestionnaireService {
 
   public sendQuestionnaireAnswers(id: number, answers: any[]): void {
     this.questionnaireStore.dispatch(new PostQuestionnaireAnswers({id, answers}));
-    
+  }
+
   public loadCurrentQuestionnaires(personId: number): void {
     // Dispatch action to get current questionnaire
     this.questionnaireStore.dispatch(new GetQuestionnaires({personId}));
