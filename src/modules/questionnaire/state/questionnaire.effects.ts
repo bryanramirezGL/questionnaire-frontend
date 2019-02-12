@@ -4,7 +4,9 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Types, PostQuestionnaireAnswers } from './questionnaire.actions';
 import {
   GetQuestionnaire,
-  GetQuestionnaireSuccess
+  GetQuestionnaires,
+  GetQuestionnaireSuccess,
+  GetQuestionnairesSuccess
 } from './questionnaire.actions';
 import { mergeMap, map } from 'rxjs/operators';
 import { QuestionnaireService } from '../services';
@@ -22,6 +24,18 @@ export class QuestionnaireEffects {
     map(
       (questionnaire: IQuestionnaire) =>
         new GetQuestionnaireSuccess(questionnaire)
+    )
+  );
+
+  @Effect()
+  getCurrentCuestionnaires$ = this.actions$.pipe(
+    ofType(Types.GET_QUESTIONNAIRES),
+    mergeMap((action: GetQuestionnaires) =>
+      this.questionnaireService.getQuestionnairesByPersonId(action.payload.personId)
+    ),
+    map(
+      (questionnaires: IQuestionnaire[]) =>
+        new GetQuestionnairesSuccess(questionnaires)
     )
   );
 

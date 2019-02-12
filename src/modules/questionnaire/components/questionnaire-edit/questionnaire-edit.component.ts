@@ -25,9 +25,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class QuestionnaireEditComponent implements OnInit, OnDestroy {
   private componetDestroyed: Subject<any> = new Subject();
-  public currentQuestionnaire$: Observable<
-    IQuestionnaire
-  > = this.questionnaireService.currentQuestionnaire$.pipe(
+  public currentQuestionnaire$: Observable<IQuestionnaire> = this.questionnaireService.currentQuestionnaire$.pipe(
     filter(currentQuestionnaire => currentQuestionnaire != null)
   );
   public currentQuestionnaireForm$: Observable<
