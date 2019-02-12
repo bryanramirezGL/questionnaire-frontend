@@ -1,10 +1,39 @@
 <main role="main" class="container">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Medical Director Questionnaire</a>
-</nav>
-
-
-<div class="container border border-dark">
-  Content
-</div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">{{ (currentQuestionnaireForm$ | async)?.name }}</a>
+  </nav>
+  <div class="container border border-dark">
+    <form (ngSubmit)="onQuestionnaireFormSubmit()" *ngIf="questionnaireForm" [formGroup]="questionnaireForm">
+      <div *ngFor="let section of formSections$ | async">
+        {{section.name}}
+        <div *ngFor="let question of section.fields" >
+          <div [ngSwitch]="question.type">
+            <div *ngSwitchCase="'shortText'">
+              <mat-form-field>
+                <input matInput [placeholder]="question.label" [formControlName]="question.key" [id]="question.key">
+              </mat-form-field>
+            </div> 
+            <div *ngSwitchCase="'longText'">
+              <mat-form-field>
+                <textarea matInput [placeholder]="question.label" [formControlName]="question.key" [id]="question.key"></textarea>
+              </mat-form-field>
+            </div>
+            <div *ngSwitchCase="'date'">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" [placeholder]="question.label" [formControlName]="question.key" [id]="question.key">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div *ngSwitchCase="'checkbox'">
+              <mat-checkbox [formControlName]="question.key" [id]="question.key">{{question.label}}</mat-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </div>
 </main>

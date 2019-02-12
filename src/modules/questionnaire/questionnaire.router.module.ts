@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { QuestionnaireEditComponent } from './components/questionnaire-edit/questionnaire-edit.component';
-import { QuestionnaireListComponent } from './components/questionnaire-list/questionnaire-list.component';
+import { QuestionnaireEditComponent, QuestionnaireListComponent } from './components';
 
 const routes: Routes = [
   {
@@ -10,7 +9,7 @@ const routes: Routes = [
     redirectTo: 'list',
   },
   {
-    path: 'edit',
+    path: 'open/:id',
     component: QuestionnaireEditComponent
   },
   {

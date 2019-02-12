@@ -7,22 +7,28 @@ import { COMPONENTS } from './components';
 import { DIRECTIVES } from './directives';
 import { PIPES } from './pipes';
 
-/* Angular Material */
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
+import {
+  MatInputModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatFormFieldModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatNativeDateModule,
+  MatDatepickerModule,
+  MatCheckboxModule,
+} from '@angular/material';
 
 const MaterialsModules = [
   MatInputModule,
   MatButtonModule,
   MatSelectModule,
   MatFormFieldModule,
-  FormsModule,
   MatToolbarModule,
-  MatIconModule
+  MatIconModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatCheckboxModule,
 ];
 
 @NgModule({

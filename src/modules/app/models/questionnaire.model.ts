@@ -1,9 +1,13 @@
+import { IPerson } from './person.model';
+
 export interface IFormField {
   id?: string;
   label?: string;
   description?: string;
-  requred: boolean;
-  value: string;
+  type?: string;
+  required?: boolean;
+  value?: string;
+  key?: string;
 }
 
 export interface IFormSection {
@@ -15,11 +19,12 @@ export interface IFormSection {
 export interface IForm {
   id?: string;
   sections?: IFormSection[];
+  name?: string;
 }
 
 export interface IQuestionnaire {
   id?: number;
-  person_id?: string;
+  person?: IPerson;
   submitDate?: string;
   status?: string;
   form: IForm;
