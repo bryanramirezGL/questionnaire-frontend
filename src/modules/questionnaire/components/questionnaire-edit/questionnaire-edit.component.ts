@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { QuestionnaireService } from 'src/modules/questionnaire/services';
-import { Observable, Subject, from } from 'rxjs';
+import { Observable, Subject, from, of } from 'rxjs';
 import {
   IQuestionnaire,
   IFormField,
@@ -8,7 +8,14 @@ import {
   IForm
 } from 'src/modules/app/models';
 import { ActivatedRoute } from '@angular/router';
-import { takeUntil, map, mergeMap, toArray, filter } from 'rxjs/operators';
+import {
+  takeUntil,
+  map,
+  mergeMap,
+  toArray,
+  filter,
+  withLatestFrom
+} from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -21,15 +28,15 @@ export class QuestionnaireEditComponent implements OnInit, OnDestroy {
   public currentQuestionnaire$: Observable<IQuestionnaire> = this.questionnaireService.currentQuestionnaire$.pipe(
     filter(currentQuestionnaire => currentQuestionnaire != null)
   );
-  public currentQuestionnaireForm$: Observable<IForm> = this.currentQuestionnaire$.pipe(
-    map(questionnaire =>
-      questionnaire.form ? questionnaire.form : null,
-    ),
+  public currentQuestionnaireForm$: Observable<
+    IForm
+  > = this.currentQuestionnaire$.pipe(
+    map(questionnaire => (questionnaire.form ? questionnaire.form : null))
   );
   public formSections$: Observable<
     IFormSection[]
   > = this.currentQuestionnaireForm$.pipe(
-    map(form => form ? form.sections : []),
+    map(form => (form ? form.sections : [])),
     mergeMap(sections =>
       from(sections).pipe(
         map(section => ({
@@ -73,7 +80,26 @@ export class QuestionnaireEditComponent implements OnInit, OnDestroy {
   }
 
   public onQuestionnaireFormSubmit(): void {
-    console.log('Form Data: ', this.questionnaireForm.getRawValue());
+    if (this.questionnaireForm.invalid) {
+      return;
+    }
+    of(this.questionnaireForm.getRawValue())
+      .pipe(
+        map(formData =>
+          Object.keys(formData).map(key => ({
+            fieldId: key.replace('question_', ''),
+            value: formData[key]
+          }))
+        ),
+        withLatestFrom(this.currentQuestionnaire$),
+        takeUntil(this.componetDestroyed)
+      )
+      .subscribe(([answers, questionnaire]) =>
+        this.questionnaireService.sendQuestionnaireAnswers(
+          questionnaire.id,
+          answers
+        )
+      );
   }
 
   public ngOnDestroy(): void {
