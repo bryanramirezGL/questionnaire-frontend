@@ -25,8 +25,8 @@ export class PostQuestionnaireAnswers implements Action {
   readonly type = Types.POST_QUESTIONNAIRE_ANSWERS;
   constructor(public payload: {
       id: number | null;
-      fields: any[] | null;
-    } = { id: null, fields: null }
+      answers: any[] | null;
+    } = { id: null, answers: null }
   ) {}
 }
 

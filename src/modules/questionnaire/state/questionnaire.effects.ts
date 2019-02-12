@@ -31,7 +31,7 @@ export class QuestionnaireEffects {
     mergeMap((action: PostQuestionnaireAnswers) =>
       this.questionnaireService.postQuestionnaireAnswers(
         action.payload.id,
-        action.payload.fields
+        action.payload.answers
       )
     ),
     map(() => new RedirectUser({ path: 'questionnaire/list' }))

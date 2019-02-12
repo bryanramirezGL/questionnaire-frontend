@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment';
 
 import { IQuestionnaire } from '../../app/models';
 import { AppService } from 'src/modules/app/services';
-import { GetQuestionnaire } from '../state/questionnaire.actions';
+import { GetQuestionnaire, PostQuestionnaireAnswers } from '../state/questionnaire.actions';
 
 @Injectable()
 export class QuestionnaireService {
@@ -22,6 +22,10 @@ export class QuestionnaireService {
   public loadCurrentQuestionnaire(id: number): void {
     // Dispatch action to get current questionnaire
     this.questionnaireStore.dispatch(new GetQuestionnaire({id}));
+  }
+
+  public sendQuestionnaireAnswers(id: number, answers: any[]): void {
+    this.questionnaireStore.dispatch(new PostQuestionnaireAnswers({id, answers}));
   }
 
   public getQuestionnairesByPersonId(personId: number): Observable<IQuestionnaire[]> {
@@ -38,11 +42,11 @@ export class QuestionnaireService {
       .pipe(catchError(this.appService.handleError));
   }
 
-  public postQuestionnaireAnswers(questionnaireId: number, fields: any[]) {
+  public postQuestionnaireAnswers(questionnaireId: number, answers: any[]) {
     return this.httpClient
-      .post<IQuestionnaire>(`${environment.apiUrl}/questionnaire/${questionnaireId}`, {
-        questionnaire_id: questionnaireId,
-        fields,
+      .post<IQuestionnaire>(`${environment.apiUrl}/questionnaire/${questionnaireId}/submit`, {
+        answers,
+        submitDate: new Date(),
       })
       .pipe(catchError(this.appService.handleError));
   }
