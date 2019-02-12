@@ -1,9 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { QuestionnaireComponent } from './components';
+import { QuestionnaireEditComponent, QuestionnaireListComponent, QuestionnaireSsoComponent } from './components';
 
-const routes: Routes = [{ path: '', component: QuestionnaireComponent }];
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'sso',
+  },
+  {
+    path: 'open/:id',
+    component: QuestionnaireEditComponent
+  },
+  {
+    path: 'list',
+    component: QuestionnaireListComponent
+  },
+  {
+    path: 'sso',
+    component: QuestionnaireSsoComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

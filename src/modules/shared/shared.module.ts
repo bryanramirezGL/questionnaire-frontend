@@ -7,14 +7,42 @@ import { COMPONENTS } from './components';
 import { DIRECTIVES } from './directives';
 import { PIPES } from './pipes';
 
+import {
+  MatInputModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatFormFieldModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatNativeDateModule,
+  MatDatepickerModule,
+  MatCheckboxModule,  
+  MatListModule,
+  MatProgressSpinnerModule
+} from '@angular/material';
+
+const MaterialsModules = [
+  MatInputModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatFormFieldModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatCheckboxModule,
+  MatListModule,
+  MatProgressSpinnerModule
+];
 
 @NgModule({
-  imports: [CommonModule, FormsModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, RouterModule, ReactiveFormsModule, ...MaterialsModules],
   exports: [
     CommonModule,
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
+    ...MaterialsModules,
     ...COMPONENTS,
     ...DIRECTIVES,
   ],
