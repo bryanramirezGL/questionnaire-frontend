@@ -25,7 +25,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class QuestionnaireEditComponent implements OnInit, OnDestroy {
   private componetDestroyed: Subject<any> = new Subject();
-  public currentQuestionnaire$: Observable<IQuestionnaire> = this.questionnaireService.currentQuestionnaire$.pipe(
+  public currentQuestionnaire$: Observable<
+    IQuestionnaire
+  > = this.questionnaireService.currentQuestionnaire$.pipe(
     filter(currentQuestionnaire => currentQuestionnaire != null)
   );
   public currentQuestionnaireForm$: Observable<
@@ -41,6 +43,11 @@ export class QuestionnaireEditComponent implements OnInit, OnDestroy {
       from(sections).pipe(
         map(section => ({
           ...section,
+          description:
+            `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+            ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+            voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
           fields: section.fields.map(field => ({
             ...field,
             key: `question_${field.id}`
