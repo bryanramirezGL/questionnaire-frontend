@@ -12,11 +12,11 @@
 #### Setup Project
 
 
-- Install [NodeJS](https://nodejs.org/en/download/)
-- Install [Angular CLI](https://angular.io/guide/quickstart) 
+- Install [NodeJS](https://nodejs.org/en/download/) (Recommended version 11.9.0)
+- Install [Angular CLI](https://angular.io/guide/quickstart) (Recommended version 7.3.0)
 
 ````
-npm install -g @angular/cli
+npm install -g @angular/cli@7.3.0
 ````
 
 - clone the repo
