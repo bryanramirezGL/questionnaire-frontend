@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { QuestionnaireEditComponent, QuestionnaireListComponent } from './components';
+import { QuestionnaireEditComponent, QuestionnaireListComponent, QuestionnaireSsoComponent } from './components';
 
 const routes: Routes = [
   {
@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'list',
     component: QuestionnaireListComponent
+  },
+  {
+    path: 'sso',
+    component: QuestionnaireSsoComponent
   }
 ];
 
