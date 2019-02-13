@@ -1,25 +1,28 @@
-<main role="main" class="container mt-3">
+<main role="main" class="container">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">{{ (currentQuestionnaireForm$ | async)?.name }}</a>
   </nav>
-  <div class="container border border-dark pt-3 pb-3">
+  <div class="container border border-dark">
+    <div>
+        {{ (currentQuestionnaireForm$ | async)?.description }}
+    </div>
     <form (ngSubmit)="onQuestionnaireFormSubmit()" *ngIf="questionnaireForm" [formGroup]="questionnaireForm">
       <div *ngFor="let section of formSections$ | async">
-        <p class="text-justify">{{section.name}}
-        {{section.description}}</p>
+        {{section.name}}
+        {{section.description}}
         <div *ngFor="let question of section.fields" >
           <div [ngSwitch]="question.type">
-            <div *ngSwitchCase="'shortText'">
+            <div *ngSwitchCase="'text'">
               <mat-form-field>
                 <input matInput [placeholder]="question.label" [formControlName]="question.key" [id]="question.key">
               </mat-form-field>
             </div> 
-            <div *ngSwitchCase="'longText'">
+            <div *ngSwitchCase="'textarea'">
               <mat-form-field>
                 <textarea matInput [placeholder]="question.label" [formControlName]="question.key" [id]="question.key"></textarea>
               </mat-form-field>
             </div>
-            <div *ngSwitchCase="'date'">
+            <div *ngSwitchCase="'datetime'">
               <mat-form-field>
                 <input matInput [matDatepicker]="picker" [placeholder]="question.label" [formControlName]="question.key" [id]="question.key">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -32,8 +35,8 @@
           </div>
         </div>
       </div>
-      <div class="example-button-row text-right">
-        <button mat-raised-button color="primary" type="submit">Save</button>
+      <div>
+        <button mat-button mat-stroked-button type="submit" color="primary">Save</button>
       </div>
     </form>
   </div>

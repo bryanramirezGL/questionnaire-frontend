@@ -33,7 +33,12 @@ export class QuestionnaireEditComponent implements OnInit, OnDestroy {
   public currentQuestionnaireForm$: Observable<
     IForm
   > = this.currentQuestionnaire$.pipe(
-    map(questionnaire => (questionnaire.form ? questionnaire.form : null))
+    map(questionnaire => (questionnaire.form ? questionnaire.form : null)),
+    map(form => ({...form, description:
+      `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+      et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+      ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+      voluptate velit esse cillum dolore eu fugiat nulla pariatur.`}))
   );
   public formSections$: Observable<
     IFormSection[]
@@ -117,7 +122,7 @@ export class QuestionnaireEditComponent implements OnInit, OnDestroy {
   private toFormGroup(questions: IFormField[]): FormGroup {
     const group: any = {};
     questions.forEach(question => {
-      group[question.key] = question.required
+      group[question.key] = question.required === 1
         ? new FormControl(question.value || '', Validators.required)
         : new FormControl(question.value || '');
     });
