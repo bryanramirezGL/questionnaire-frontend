@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/modules/app/services';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-questionnaire-sso',

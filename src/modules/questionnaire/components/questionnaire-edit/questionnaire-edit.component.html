@@ -1,12 +1,12 @@
-<main role="main" class="container">
+<main role="main" class="container mt-3">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">{{ (currentQuestionnaireForm$ | async)?.name }}</a>
   </nav>
-  <div class="container border border-dark">
+  <div class="container border border-dark pt-3 pb-3">
     <form (ngSubmit)="onQuestionnaireFormSubmit()" *ngIf="questionnaireForm" [formGroup]="questionnaireForm">
       <div *ngFor="let section of formSections$ | async">
-        {{section.name}}
-        {{section.description}}
+        <p class="text-justify">{{section.name}}
+        {{section.description}}</p>
         <div *ngFor="let question of section.fields" >
           <div [ngSwitch]="question.type">
             <div *ngSwitchCase="'shortText'">
@@ -32,8 +32,8 @@
           </div>
         </div>
       </div>
-      <div>
-        <button mat-button mat-stroked-button type="submit" color="primary">Save</button>
+      <div class="example-button-row text-right">
+        <button mat-raised-button color="primary" type="submit">Save</button>
       </div>
     </form>
   </div>

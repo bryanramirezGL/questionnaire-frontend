@@ -14,7 +14,7 @@ import { SERVICES } from './services';
     QuestionnaireRouterModule,
     StoreModule.forFeature('questionnaire', questionnaireReducer),
     EffectsModule.forFeature([ QuestionnaireEffects ]),
-    SharedModule,
+    SharedModule
   ],
   declarations: [...COMPONENTS],
   providers: [...SERVICES]

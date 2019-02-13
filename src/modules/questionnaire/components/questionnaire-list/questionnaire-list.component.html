@@ -1,11 +1,14 @@
-<main role="main" class="container">
+<main role="main" class="container mt-3">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">L&C Questionnaires</a>
   </nav>
 
-  <div class="container border border-dark">
+  <div class="container border border-dark pt-3 pb-3">
     <mat-nav-list>
-      <mat-list-item *ngFor="let questionnaire of currentQuestionnaires$ | async" [routerLink]="['../open/' + questionnaire.id]">
+      <mat-list-item *ngFor="let questionnaire of currentQuestionnaires$ | async" 
+                     [routerLink]="( questionnaire.status != 'WAITING_REVIEW') ? ['../open/' + questionnaire.id] : '../list'"
+                     [ngClass]="{ 'text-muted': questionnaire.status=='WAITING_REVIEW' }"
+                     (click)="isDisabled()">
         <a matLine>{{ questionnaire.form.name }}</a>
         <mat-icon mat-list-icon>folder</mat-icon>
         <p mat-line> {{ questionnaire.status }}</p>
@@ -13,3 +16,6 @@
     </mat-nav-list>
   </div>
 </main>
+<div *ngIf="showMessage" class="alert alert-danger custom-alert animated swing" [@itemAnim] role="alert">
+    This questionnaire is waiting for review.
+</div>
