@@ -5,7 +5,7 @@ export interface IFormField {
   label?: string;
   description?: string;
   type?: string;
-  required?: boolean;
+  required?: number;
   value?: string;
   key?: string;
 }
@@ -20,6 +20,7 @@ export interface IForm {
   id?: string;
   sections?: IFormSection[];
   name?: string;
+  description?: string;
 }
 
 export interface IQuestionnaire {
