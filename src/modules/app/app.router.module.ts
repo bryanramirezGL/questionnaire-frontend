@@ -4,8 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/questionnaire/sso',
-    pathMatch: 'full'
+    loadChildren: '../dashboard-mock/dashboard.module#DashboardMockModule',
   },
   {
     path: 'questionnaire',
