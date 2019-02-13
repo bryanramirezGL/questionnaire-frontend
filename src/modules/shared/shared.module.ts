@@ -16,7 +16,7 @@ import {
   MatIconModule,
   MatNativeDateModule,
   MatDatepickerModule,
-  MatCheckboxModule,  
+  MatCheckboxModule,
   MatListModule,
   MatProgressSpinnerModule
 } from '@angular/material';
