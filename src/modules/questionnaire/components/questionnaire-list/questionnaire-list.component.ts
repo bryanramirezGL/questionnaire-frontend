@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionnaireService } from 'src/modules/questionnaire/services';
 import { IQuestionnaire } from 'src/modules/app/models';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-questionnaire-list',
@@ -13,9 +12,9 @@ export class QuestionnaireListComponent implements OnInit {
 
   public currentQuestionnaires$: Observable<IQuestionnaire[]> = this.questionnaireService.currentQuestionnaires$;
 
-  constructor(private route: ActivatedRoute, private questionnaireService: QuestionnaireService) { }
+  constructor(private questionnaireService: QuestionnaireService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.questionnaireService.loadCurrentQuestionnaires(1);
   }
 
