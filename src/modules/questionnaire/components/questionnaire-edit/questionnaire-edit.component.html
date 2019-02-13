@@ -4,12 +4,16 @@
   </nav>
   <div class="container border border-dark pt-3 pb-3">
     <div>
+      <p>
         {{ (currentQuestionnaireForm$ | async)?.description }}
+      </p>
     </div>
     <form (ngSubmit)="onQuestionnaireFormSubmit()" *ngIf="questionnaireForm" [formGroup]="questionnaireForm">
       <div *ngFor="let section of formSections$ | async">
-        <p class="text-justify">
+        <h4 class="pt-3">
         {{section.name}}
+      </h4>
+        <p class="text-justify">
         {{section.description}}
        </p>
         <div *ngFor="let question of section.fields" >
